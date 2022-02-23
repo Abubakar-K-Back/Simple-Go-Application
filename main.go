@@ -8,6 +8,7 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
+	"os"
 )
 
 type person struct{
@@ -68,7 +69,7 @@ func createPerson(w http.ResponseWriter, r *http.Request){
 }
 func main()  {
 	r:=mux.NewRouter();
-	
+	port := os.Getenv("PORT")	
 	persons = append(persons, person{ID: "1",Name: "Abubakar",Address: "H.no 285"});
 	persons = append(persons, person{ID: "2",Name: "Saad",Address: "H.no 282"});
 
@@ -77,6 +78,6 @@ func main()  {
 	r.HandleFunc("/createPerson",createPerson).Methods("Post");
 	r.HandleFunc("/byName",getPersonByName).Methods("GET");
 
-	fmt.Print("Server Starting at port: 8000");
-	log.Fatal(http.ListenAndServe(":8000",r))
+	fmt.Print("Server Starting at port: "+port);
+	log.Fatal(http.ListenAndServe(":"+port,r))
 }
