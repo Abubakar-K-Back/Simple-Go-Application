@@ -19,6 +19,7 @@ type subject struct{
 	ID string `json:"id"`
 	Subject_Name string `json:"Sub_Name"`
 }
+
 var subjects []subject;
 var persons []person;
 
